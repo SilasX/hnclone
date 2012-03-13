@@ -29,19 +29,31 @@ describe Link do
       @l = Link.create :title => "dont care", :url => "http://google.com"
     end
     
-    it "has a number of votes" do
-      @l.votes.count.should be_zero
-      @l.vote_count.should == 0
-    end
-
-    it 'can be upvoted' do
-      expect {
-        @l.votes.create
-      }.to change(@l, :vote_count).by(1)
-
-    end
+    # it "has a number of votes" do
+    #   @l.votes.count.should be_zero
+    #   @l.vote_count.should == 0
+    # end
+    # 
+    # it 'can be upvoted' do
+    #   expect {
+    #     @l.votes.create
+    #   }.to change(@l, :vote_count).by(1)
+    # 
+    # end
     
-    it "can be sorted by vote count"
+    it "can be sorted by vote count" do
+      @links = FactoryGirl.create_list(:link,3)
+      Vote.create!(:link => @links[0])
+      5.times do
+        Vote.create!(:link => @links[1])
+      end
+      2.times do
+        Vote.create!(:link => @links[2])
+      end
+      links = Link.order_by_vote
+      links.first.vote_count.should == 5
+      links.last.vote_count.should == 0
+    end
     
   
   end

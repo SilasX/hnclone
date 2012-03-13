@@ -4,7 +4,8 @@ Please don't sue us for copyright.
 <ul>
 <% @links.each do |link| %>
   <li>
-	<%= link_to link.title, link.url %>
+	<%= link_to link.title, link.url %><br>
+	<%= "Current rating: #{link.vote_count}"%>
   </li>
 
 <%= form_for Vote.new do |f| %>

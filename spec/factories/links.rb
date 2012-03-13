@@ -2,7 +2,7 @@
 
 FactoryGirl.define do
   factory :link do
-    url "http://myurl.com"
-    title "My Title"
+    sequence(:url){|n| "http://url#{n}.com"}
+    sequence(:title){|n| "Title#{n}"}
   end
 end
