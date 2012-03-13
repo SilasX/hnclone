@@ -1,14 +1,19 @@
 <h1>Welcome to HNClone</h1>
-Please don't sue us for copyright.
-
+<% if params[:order] == 'votes' %>
+	<%= link_to "order by newest", links_path%>
+<% else %>
+	<%= link_to "order by top voted", links_path(:order => 'votes')%>
+<% end %>
 <ul>
 <% @links.each do |link| %>
   <li>
 	<%= link_to link.title, link.url %>
   </li>
+<span class="vote_count"><%= link.votes.count %></span>
 
 <%= form_for Vote.new do |f| %>
 <%= f.hidden_field :link_id, :value => link.id %>
+<%= f.hidden_field :order, :value => params[:order] %>
 <%= f.submit "vote up" %>
 <% end %>
 

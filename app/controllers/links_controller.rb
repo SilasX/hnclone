@@ -1,7 +1,10 @@
 class LinksController < ApplicationController
   def index
-    @links = Link.all
-    
+    if params[:order] == 'votes'
+      @links = Link.by_vote_count
+    else
+      @links = Link.all
+    end
   end
 
   def new
