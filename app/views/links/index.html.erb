@@ -5,6 +5,7 @@ Please don't sue us for copyright.
 <% @links.each do |link| %>
   <li>
 	<%= link_to link.title, link.url %>
+	(<span id="vote_count"><%= link.votes.count %></span>)
   </li>
 
 <%= form_for Vote.new do |f| %>

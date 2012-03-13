@@ -59,5 +59,9 @@ module Hnclone
     config.generators do |g|
       g.fixture_replacement 'factory_girl', :dir => 'spec/factories'
     end
+    
+    # recommended by devise
+    config.assets.initialize_on_precompile = false
+    
   end
 end

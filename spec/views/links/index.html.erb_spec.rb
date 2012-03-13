@@ -15,5 +15,16 @@ describe "links/index.html.erb" do
           :with => { :name => "vote[link_id]", :value => @links[0].id}
       end
     end
+    
+    it "displays a vote count" do
+      rendered.should have_tag('span#vote_count')
+    end
+    
+    it "displays the correct number of votes" do
+      @links[0].votes.create
+      render
+      rendered.should have_tag('span#vote_count', :text => "1")
+    end
+    
   end
 end
